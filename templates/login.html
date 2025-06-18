@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login </h2>
+        <form action="/login" method="POST">
+            <div class="Data">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+            </div>
+                
+            <div class="Data">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter the password" required>
+            </div>
+            
+
+            <button type="submit">LOGIN</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert" id="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const flashMessage = document.querySelector('.alert');
+                if (flashMessage) {
+                    setTimeout(function() {
+                        flashMessage.classList.add('fade-out');
+                        setTimeout(function() {
+                            flashMessage.remove();
+                        }, 500);
+                    }, 3000);
+                }
+            });
+        </script>
+</body>
+</html>

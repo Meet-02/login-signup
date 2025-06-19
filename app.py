@@ -102,5 +102,15 @@ def login():
 def main_page():
     return render_template('page.html')
 
+
+@app.route('/download-data')
+def download_data():
+    path = 'users.xlsx'  # Path to your Excel file
+    if os.path.exists(path):
+        return send_file(path, as_attachment=True)
+    else:
+        flash("Data file not found.")
+        return redirect('/')
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1',port=8080)
